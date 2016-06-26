@@ -1,0 +1,21 @@
+front:
+  build: .
+  ports:
+    - "8078:80"
+    - "443:443"
+    - "9007:9000"
+  links:
+    - mysql:mysql
+  volumes:
+    - ./www:/var/www
+    - ./sites:/etc/nginx/conf.d
+    - ./logs:/var/log/supervisor
+
+mysql:
+  image: mysql
+  ports:
+    - "3367:3306"
+  environment:
+    MYSQL_ROOT_PASSWORD: admin123
+
+    
