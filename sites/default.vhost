@@ -11,7 +11,6 @@ server {
         try_files $uri /app.php$is_args$args;
   }
 
-
   location /status {
      access_log off;
      allow 172.17.0.0/16;
@@ -53,7 +52,6 @@ server {
         # Remove the internal directive to allow URIs like this
         internal;
   }
-}
 
   location ~ \.php$ {
       return 404;
