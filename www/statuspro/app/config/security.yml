@@ -21,8 +21,13 @@ security:
             security: false
 
         main:
-            http_basic: ~
             provider: statuspro_db_provider
+        login_area:
+            pattern: ^/login$
+            anonymous: ~
+        secured_area:
+            pattern: ^/
+            form_login: ~
             # activate different ways to authenticate
 
             # http_basic: ~
