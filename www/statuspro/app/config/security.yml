@@ -16,18 +16,36 @@ security:
 
     firewalls:
         # disables authentication for assets and the profiler, adapt it according to your needs
+
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
 
         main:
             provider: statuspro_db_provider
-        login_area:
-            pattern: ^/login$
-            anonymous: ~
-        secured_area:
             pattern: ^/
-            form_login: ~
+            form_login:
+                # submit the login form here
+                check_path: /login_check
+                # the user is redirected here when he/she needs to login
+                login_path: /login
+                # if true, forward the user to the login form instead of redirecting
+                use_forward: false
+                # login success redirecting options (read further below)
+                always_use_default_target_path: false
+                default_target_path: /
+                target_path_parameter: _target_path
+                use_referer: false
+            anonymous:  true
+    access_control:
+        - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/, roles: ROLE_ADMIN }
+        #login_area:
+        #    pattern: ^/login$
+        #    anonymous: ~
+        #secured_area:
+        #    pattern: ^/
+        #    form_login: ~
             # activate different ways to authenticate
 
             # http_basic: ~
